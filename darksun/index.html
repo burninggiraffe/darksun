@@ -1,0 +1,103 @@
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="An interactive atlas devoted to the Dungeons and Dragons campaign setting of DarkSun.">
+		<meta name="author" content="Randy Ostridge">
+
+		<title>DarkSun Atlas: The World of Athas</title>
+
+		<link href="css/styles.css" rel="stylesheet">
+		<link href="css/leaflet.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="js/leaflet.js"></script>
+		<script src="js/scripts.js"></script>     
+        <script>
+            $(document).ready(function(){
+            
+                $.get({url: "onload_ds_athas.php",
+                        data: {"action": "test"}, 
+                        success: function(result){
+                            console.log(result);
+                            for (index = 0; index < result.length; ++index)
+                            {
+                                //var info = xmlDoc.getElementsByTagName('landmark');
+                                var _type = result[index]['al2_type'];
+                                if (_type == 'Village') {
+                                    var symbol = '<img style="float:right;" src="images/village.png" alt="'+_type+'">';
+                                }
+                                if (_type == 'City') {
+                                    var symbol = '<img style="float:right;" src="images/city.png" alt="'+_type+'">';
+                                }
+                                if (_type == 'Fortress') {
+                                    var symbol = '<img style="float:right;" src="images/fortress.png" alt="'+_type+'s">';
+                                }
+                                if (_type == 'Oasis') {
+                                    var symbol = '<img style="float:right;" src="images/oasis.png" alt="'+_type+'">';
+                                }
+                                if (_type == 'Ruins') {
+                                    var symbol = '<img style="float:right;" src="images/ruins.png" alt="'+_type+'">';
+                                }
+                                if (_type == 'Special') {
+                                    var symbol = '<img style="float:right;" src="images/special.png" alt="'+_type+'">';
+                                }
+                                alert(_type);
+                                var pop = info[0].getAttribute('population');
+                                var ref = info[0].getAttribute('ref');
+
+                                var content = xmlDoc.getElementsByTagName('text');
+                                var details = content[0].childNodes[1].data;
+
+                                var txt = '<h3>' + title + '</h3>' + symbol + 'Type: ' + _type + '<br>Population: ' + pop + '<br><br>' + details + '<br><hr><br><i>Reference: ' + ref + '</i>';
+                                        
+                                L.popup({maxWidth:600, keepInView:true}).setLatLng(latlng).setContent(txt).openOn(map);
+                                L.marker([708,641], {icon: icon}).addTo(map).bindPopup("I am a green leaf.");
+                            }
+                            
+                }});
+            
+            });
+            var LeafIcon = L.Icon.extend({
+                options: {
+                    iconUrl: 'images/marker.png',
+                    iconSize:     [24, 24],
+                    shadowSize:   [50, 64],
+                    iconAnchor:   [22, 94],
+                    shadowAnchor: [4, 62],
+                    popupAnchor:  [-12, -100]
+                }
+            });
+            var icon = new LeafIcon();
+        </script>
+        
+
+	</head>
+
+	<body>
+            <div class="full-width full-height no-margin no-padding">
+                    <div id="map" class="full-height">
+                        <div id="info"><p>DarkSun Atlas: The World of Athas &nbsp;&nbsp;|&nbsp;&nbsp; Made with <a href="https://leafletjs.com/" target="_blank">Leaflet 1.4.0</a> and a bunch of HTML5 &nbsp;&nbsp;|&nbsp;&nbsp; All DarkSun materials are property of <a href="http://dnd.wizards.com/" target="_blank">Wizards of the Coast</a></p></div>
+                        <div>
+                            <div id="compass"><img src="images/compass.png"></div>
+                            <div id="scale"><img src="images/scale.png"></div>
+                        </div>
+                        
+                </div></div>
+                <script>
+                        var bounds = [[0,0], [2400,1832]];
+                        var map = L.map('map', {
+                            crs: L.CRS.Simple,
+                            center: [0,500],
+                            maxBounds: bounds,
+                            maxBoundsViscosity: 1.0,
+                            zoom: -1
+                        });
+                        
+                        var image = L.imageOverlay('images/athas_map.jpg', bounds).addTo(map);
+                        map.fitBounds(bounds);
+                    </script>
+    </body>
+    
+</html>

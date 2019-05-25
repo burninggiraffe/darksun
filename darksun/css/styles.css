@@ -1,0 +1,81 @@
+html, body {
+	height: 100%;
+	background-color: #000000;
+	margin: 0px;
+	padding: 0px;
+}
+
+.full-height {
+	height: 100%;
+}
+
+.full-width {
+	width: 100%
+}
+
+#map {
+	max-width: 1832px;
+	margin: 0 auto;
+}
+
+#compass {
+	position: absolute;
+	bottom: 60px;
+	left: 10px;
+	z-index: 5000;
+}
+
+#scale {
+	position: absolute;
+	bottom: 60px;
+	right: 10px;
+	z-index: 5001;
+}
+
+#info {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	z-index: 5002;
+	background-color: #000000;
+	border: 1px solid #464646;
+	color: #cccccc;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+}
+
+#info a:link, #info a:visited {
+	color: #FFFFFF;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+#info a:hover {
+	color: #EFB252;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.marker-icon {
+	width: 150px;
+	color: #000000;
+	text-align: center;
+}
+
+.no-padding {
+	padding: 0px;
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+.right {
+	float: right:
+}
+
+.left {
+	float: left;
+}
